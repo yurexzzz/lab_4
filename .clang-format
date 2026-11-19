@@ -1,182 +1,331 @@
-#include <iostream>
-// IndentPPDirectives
-#ifdef WIN32
-#include <windows.h>
-#endif
-// SortIncludes
-#include <boost/asio/io_context.hpp>
-#include <boost/asio/ip/tcp.hpp>
-#include <boost/asio/signal_set.hpp>
-#include <boost/asio/write.hpp>
-#include <map>
-#include <string>
-#include <vector>
-
-#include "AnotherHeader.h"
-#include "MyHeader.h"
-
-// AlignConsecutiveMacros
-#define SHORT_NAME 42
-#define LONGER_NAME 0x007f
-#define EVEN_LONGER_NAME (2)
-#define fooo(x) (x * x)
-#define baar(y, z) (y + z)
-
-// AlignEscapedNewlines
-#define PPP \
-  int aaaa; \
-  int b;    \
-  int dddddddddd;
-
-namespace LevelOneNamespace {
-namespace LevelTwoNamespace {
-
-struct AAAAAAAAAAAAAAAAAAAA {
-  // AlignConsecutiveDeclarations
-  int a;
-  int bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb;
-  std::string cccccccccccccccccc;
-};
-
-// AlwaysBreakTemplateDeclarations
-template <typename T>
-T foo() {}
-
-template <typename T>
-T foo(int aaaaaaaaaaaaaaaaaaaaa, int bbbbbbbbbbbbbbbbbbbbb) {}
-
-// AllowShortEnumsOnASingleLine
-enum : unsigned int { AA = 0, BB } myEnum;
-
-// SpaceBeforeInheritanceColon
-class B : public E {
- private:
-  // AlignArrayOfStructures
-  struct AAAAAAAAAAAAAAAAAAAA test[3] = {
-      {56, 23, "hello"}, {-1, 93463, "world"}, {7, 5, "!!"}};
-
-  // AlignTrailingComments, AlignConsecutiveDeclarations, QualifierOrder,
-  // QualifierAlignment, AlignTrailingComments
-  static char const* variable;  // very important variable
-  void* const* x = nullptr;     // not so important variable
-  char const* anotherVariable;  // another comment
-  int a = 1;                    // another variable
-  // used for this, this, and that
-  int longComplicatedName = 4;
-  int b = 3;
-
- protected:
-  // AlwaysBreakAfterReturnType, QualifierAlignment
-  constexpr static inline int function(int a, int b) { return (a + b) / 2; }
-
-  // AllowShortFunctionsOnASingleLine
-  static bool shortFilter(AAAAAAAAAAAAAAAAAAAA v) { return v.a != 4; }
-
-  void empty() {}
-
-  // IndentWrappedFunctionNames
-  std::map<std::basic_string<wchar_t>, std::vector<std::pair<char, int>>> func(
-      AAAAAAAAAAAAAAAAAAAA* v);
-
- public:
-  // SpaceBeforeCtorInitializerColon
-  explicit B() : a(9) {};
-
-  // PackConstructorInitializers
-  explicit B(int _a, int _b, int _c, std::vector<std::string> str)
-      : a(_a), b(_b), longComplicatedName(_c), anotherVariable(str[0].c_str()) {
-    // AllowShortIfStatementsOnASingleLine, SpaceBeforeParens
-    if (_c) anotherVariable = nullptr;
-    if (_a)
-      anotherVariable = "baz";
-    else
-      anotherVariable = "bar";
-  }
-
-  // AllowAllParametersOfDeclarationOnNextLine BinPackParameters
-  int myFunction(int aaaaaaaaaaaaa, int bbbbbbbbbbbbbbbbbbbbbbb,
-                 int ccccccccccccc, int d, int e) {
-    int myvar = aaaaaaaaaaaaa / 10;
-    long anothervaw = d % 2;
-    // comment
-    char* msg = "Hello all";
-
-    // AlignOperands
-    myvar = bbbbbbbbbbbbbbbbbbbbbbb + ccccccccccccc + aaaaaaaaaaaaa;
-
-    // AllowShortCaseLabelsOnASingleLine, SpaceBeforeParens
-    switch (e) {
-      case 1:
-        return e;
-      case 2:
-        return 2;
-    };
-
-    // AllowShortBlocksOnASingleLine, SpaceBeforeParens
-    while (true) {
-    }
-    while (true) {
-      continue;
-    }
-  }
-
-  // AlignAfterOpenBracket, BinPackParameters,
-  void loooonFunctionIsVeryLongButNotAsLongAsJavaTypeNames(
-      std::vector<AAAAAAAAAAAAAAAAAAAA> const& inputVector,
-      std::map<int, std::string>* outputMap) {
-    std::vector<AAAAAAAAAAAAAAAAAAAA> bar;
-    std::copy_if(inputVector.begin(), inputVector.end(),
-                 std::back_inserter(bar), &shortFilter);
-    // AllowShortLambdasOnASingleLine
-    std::sort(inputVector.begin(), inputVector.end(),
-              [](auto v) { return v.a < v.b; });
-    std::transform(inputVector.begin(), inputVector.end(),
-                   std::inserter(*outputMap, outputMap->end()),
-                   [](const AAAAAAAAAAAAAAAAAAAA& element) {
-                     // LambdaBodyIndentation
-                     return std::make_pair(
-                         element.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb,
-                         element.cccccccccccccccccc);
-                   });
-  };
-  int notInline(AAAAAAAAAAAAAAAAAAAA* v);
-};
-
-// AllowShortFunctionsOnASingleLine
-int notInline(AAAAAAAAAAAAAAAAAAAA* v) { return v->a + 1; }
-
-}  // namespace LevelTwoNamespace
-}  // namespace LevelOneNamespace
-
-int main() {
-  // ReflowComments
-  // veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty of
-  // information
-  /* second veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongComment with plenty
-   * of information */
-
-  // SortUsingDeclarations
-  using std::cin;
-  using std::cout;
-
-  int aaaaaaaaaaaaaaaaaaa, bbbbbbbbbbb, ppppppppppp, eeeee;
-  // AlignConsecutiveAssignments
-  aaaaaaaaaaaaaaaaaaa = 6;
-  bbbbbbbbbbb = 5;
-  ppppppppppp = 10;
-  LevelOneNamespace::LevelTwoNamespace::B b{
-      1, 3, 4,
-      // SpaceBeforeCpp11BracedList
-      std::vector<std::string>{"aaaaaaaaaaaaaaaa", "bbbbbbbbbbbbbbbbbbbbbb",
-                               "cccccccccccccccccccccccccccc"}};
-  // AllowShortLoopsOnASingleLine
-  for (int i = 0; i < 10; i++) cout << i;
-  LevelOneNamespace::LevelTwoNamespace::AAAAAAAAAAAAAAAAAAAA
-      ddddddddddddddddddddddddd{5, 5, "ff"};
-  b.notInline(ddddddddddddddddddddddddd);
-  // SpaceAfterCStyleCast, AllowAllArgumentsOnNextLine
-  cout << (bool)b.myFunction(aaaaaaaaaaaaaaaaaaa, bbbbbbbbbbb, ppppppppppp,
-                             eeeee, 0);
-
-  return 0;
-}
+BasedOnStyle: Google
+AccessModifierOffset: -1
+AlignAfterOpenBracket: Align
+AlignArrayOfStructures: None
+AlignConsecutiveAssignments:
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: false
+  AlignFunctionDeclarations: false
+  AlignFunctionPointers: false
+  PadOperators: true
+AlignConsecutiveBitFields:
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: false
+  AlignFunctionDeclarations: false
+  AlignFunctionPointers: false
+  PadOperators: false
+AlignConsecutiveDeclarations:
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: false
+  AlignFunctionDeclarations: true
+  AlignFunctionPointers: false
+  PadOperators: false
+AlignConsecutiveMacros:
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: false
+  AlignFunctionDeclarations: false
+  AlignFunctionPointers: false
+  PadOperators: false
+AlignConsecutiveShortCaseStatements:
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCaseArrows: false
+  AlignCaseColons: false
+AlignConsecutiveTableGenBreakingDAGArgColons:
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: false
+  AlignFunctionDeclarations: false
+  AlignFunctionPointers: false
+  PadOperators: false
+AlignConsecutiveTableGenCondOperatorColons:
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: false
+  AlignFunctionDeclarations: false
+  AlignFunctionPointers: false
+  PadOperators: false
+AlignConsecutiveTableGenDefinitionColons:
+  Enabled: false
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: false
+  AlignFunctionDeclarations: false
+  AlignFunctionPointers: false
+  PadOperators: false
+AlignEscapedNewlines: Left
+AlignOperands: Align
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 0
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowBreakBeforeNoexceptSpecifier: Never
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseExpressionOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortCompoundRequirementOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLambdasOnASingleLine: All
+AllowShortLoopsOnASingleLine: true
+AllowShortNamespacesOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakBeforeMultilineStrings: true
+AttributeMacros:
+  - __capability
+  - absl_nonnull
+  - absl_nullable
+  - absl_nullability_unknown
+BinPackArguments: true
+BinPackLongBracedList: true
+BinPackParameters: BinPack
+BitFieldColonSpacing: Both
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterObjCDeclaration: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+BracedInitializerIndentWidth: -1
+BreakAdjacentStringLiterals: true
+BreakAfterAttributes: Leave
+BreakAfterJavaFieldAnnotations: false
+BreakAfterReturnType: None
+BreakArrays: true
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Attach
+BreakBeforeConceptDeclarations: Always
+BreakBeforeInlineASMColon: OnlyMultiline
+BreakBeforeTemplateCloser: false
+BreakBeforeTernaryOperators: true
+BreakBinaryOperations: Never
+BreakConstructorInitializers: BeforeColon
+BreakFunctionDefinitionParameters: false
+BreakInheritanceList: BeforeColon
+BreakStringLiterals: true
+BreakTemplateDeclarations: Yes
+ColumnLimit: 80
+CommentPragmas: "^ IWYU pragma:"
+CompactNamespaces: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: true
+DerivePointerAlignment: false
+DisableFormat: false
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: LogicalBlock
+EnumTrailingComma: Leave
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: true
+ForEachMacros:
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
+IfMacros:
+  - KJ_IF_MAYBE
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: ^<ext/.*\.h>
+    Priority: 2
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: ^<.*\.h>
+    Priority: 1
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: ^<.*
+    Priority: 2
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: .*
+    Priority: 3
+    SortPriority: 0
+    CaseSensitive: false
+IncludeIsMainRegex: ([-_](test|unittest))?$
+IncludeIsMainSourceRegex: ""
+IndentAccessModifiers: false
+IndentCaseBlocks: false
+IndentCaseLabels: true
+IndentExportBlock: true
+IndentExternBlock: AfterExternBlock
+IndentGotoLabels: true
+IndentPPDirectives: None
+IndentRequiresClause: true
+IndentWidth: 2
+IndentWrappedFunctionNames: false
+InsertBraces: false
+InsertNewlineAtEOF: false
+InsertTrailingCommas: None
+IntegerLiteralSeparator:
+  Binary: 0
+  BinaryMinDigits: 0
+  Decimal: 0
+  DecimalMinDigits: 0
+  Hex: 0
+  HexMinDigits: 0
+JavaScriptQuotes: Leave
+JavaScriptWrapImports: true
+KeepEmptyLines:
+  AtEndOfFile: false
+  AtStartOfBlock: false
+  AtStartOfFile: true
+KeepFormFeed: false
+LambdaBodyIndentation: Signature
+LineEnding: DeriveLF
+MacroBlockBegin: ""
+MacroBlockEnd: ""
+MainIncludeChar: Quote
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: None
+ObjCBinPackProtocolList: Never
+ObjCBlockIndentWidth: 2
+ObjCBreakBeforeNestedBlockParam: true
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: true
+OneLineFormatOffRegex: ""
+PPIndentWidth: -1
+PackConstructorInitializers: NextLine
+PenaltyBreakAssignment: 2
+PenaltyBreakBeforeFirstCallParameter: 1
+PenaltyBreakBeforeMemberAccess: 150
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakOpenParenthesis: 0
+PenaltyBreakScopeResolution: 500
+PenaltyBreakString: 1000
+PenaltyBreakTemplateDeclaration: 10
+PenaltyExcessCharacter: 1000000
+PenaltyIndentedWhitespace: 0
+PenaltyReturnTypeOnItsOwnLine: 200
+PointerAlignment: Left
+QualifierAlignment: Leave
+RawStringFormats:
+  - Language: Cpp
+    Delimiters:
+      - cc
+      - CC
+      - cpp
+      - Cpp
+      - CPP
+      - c++
+      - C++
+    CanonicalDelimiter: ""
+    BasedOnStyle: google
+  - Language: TextProto
+    Delimiters:
+      - pb
+      - PB
+      - proto
+      - PROTO
+    EnclosingFunctions:
+      - EqualsProto
+      - EquivToProto
+      - PARSE_PARTIAL_TEXT_PROTO
+      - PARSE_TEST_PROTO
+      - PARSE_TEXT_PROTO
+      - ParseTextOrDie
+      - ParseTextProtoOrDie
+      - ParseTestProto
+      - ParsePartialTestProto
+    CanonicalDelimiter: pb
+    BasedOnStyle: google
+ReferenceAlignment: Pointer
+ReflowComments: Always
+RemoveBracesLLVM: false
+RemoveEmptyLinesInUnwrappedLines: false
+RemoveParentheses: Leave
+RemoveSemicolon: false
+RequiresClausePosition: OwnLine
+RequiresExpressionIndentation: OuterScope
+SeparateDefinitionBlocks: Leave
+ShortNamespaceLines: 1
+SkipMacroDefinitionBody: false
+SortIncludes:
+  Enabled: true
+  IgnoreCase: false
+SortJavaStaticImport: Before
+SortUsingDeclarations: LexicographicNumeric
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterOperatorKeyword: false
+SpaceAfterTemplateKeyword: true
+SpaceAroundPointerQualifiers: Default
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeJsonColon: false
+SpaceBeforeParens: ControlStatements
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterForeachMacros: true
+  AfterFunctionDeclarationName: false
+  AfterFunctionDefinitionName: false
+  AfterIfMacros: true
+  AfterNot: false
+  AfterOverloadedOperator: false
+  AfterPlacementOperator: true
+  AfterRequiresInClause: false
+  AfterRequiresInExpression: false
+  BeforeNonEmptyParentheses: false
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: Never
+SpacesInContainerLiterals: true
+SpacesInLineCommentPrefix:
+  Minimum: 1
+  Maximum: -1
+SpacesInParens: Never
+SpacesInParensOptions:
+  ExceptDoubleParentheses: false
+  InConditionalStatements: false
+  InCStyleCasts: false
+  InEmptyParentheses: false
+  Other: false
+SpacesInSquareBrackets: false
+Standard: Auto
+StatementAttributeLikeMacros:
+  - Q_EMIT
+StatementMacros:
+  - Q_UNUSED
+  - QT_REQUIRE_VERSION
+TabWidth: 8
+TableGenBreakInsideDAGArg: DontBreak
+UseTab: Never
+VerilogBreakBetweenInstancePorts: true
+WhitespaceSensitiveMacros:
+  - BOOST_PP_STRINGIZE
+  - CF_SWIFT_NAME
+  - NS_SWIFT_NAME
+  - PP_STRINGIZE
+  - STRINGIZE
+WrapNamespaceBodyWithEmptyLines: Leave

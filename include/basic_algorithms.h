@@ -3,8 +3,8 @@
 
 // Структура одной ячейки списка
 struct Cell {
-    int Value;
-    Cell* Next;
+  int Value;
+  Cell* Next;
 };
 
 // Создание пустого списка
@@ -26,8 +26,7 @@ Cell* FindCell(Cell* top, int target);
 Cell* FindCellBefore(Cell* top, int target);
 
 // Вставка элемента после заданной ячейки
-void InsertCell(Cell*& top, Cell*& bottom,
-                Cell* after_me, int value);
+void InsertCell(Cell*& top, Cell*& bottom, Cell* after_me, int value);
 
 // Удаление ячейки после заданной
 bool DeleteAfter(Cell* after_me, Cell*& bottom);
